@@ -1,0 +1,19 @@
+name: Check Permissions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-permissions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Repository and Event Details
+        run: |
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Event Name: $GITHUB_EVENT_NAME"
+          echo "Event Path: $GITHUB_EVENT_PATH"
+          echo "Actor: $GITHUB_ACTOR"
+          echo "Token: ${{ secrets.GITHUB_TOKEN }}"
