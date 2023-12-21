@@ -28,6 +28,6 @@ jobs:
         docker build --rm=true --tag=toaeio/toae_secret_scanner_ce:2.0.1 -f Dockerfile .
 
     - name: Push Docker Image to Docker Hub
-      run: docker push toaeio/toae_secret_scanner:2.0.0
+      run: docker push toaeio/toae_secret_scanner_ce:2.0.1
 
     # Add additional steps here as needed.
