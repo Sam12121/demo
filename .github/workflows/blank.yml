@@ -28,5 +28,5 @@ jobs:
         env:
           REPO_OWNER: Sam12121
           REPO_NAME: demo
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN: ${{ secrets.TOKEN }}
 
