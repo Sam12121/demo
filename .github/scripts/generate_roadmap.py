@@ -8,13 +8,13 @@ repo_name = "demo"
 token = "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"
 
 # Function to create a GitHub issue
-def create_issue(title, body, milestone=None):
+def create_issue(title, body, milestone):
     url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/issues"
     headers = {
         "Authorization": f"Bearer {token}",
         "Accept": "application/vnd.github.v3+json",
     }
-    data = {"title": title, "body": body, "milestone": milestone}
+    data = {"title": title, "body": body, "milestone": milestone["number"]}
     response = requests.post(url, headers=headers, data=json.dumps(data))
     return response.json()
 
@@ -38,7 +38,7 @@ roadmap = [
     {"title": "Deployment and Post-Launch", "duration": 1},
 ]
 
-# Calculate due dates based on current date
+# Calculate due dates based on the current date
 current_date = datetime.utcnow()
 milestones = []
 
@@ -51,4 +51,4 @@ for task in roadmap:
 for i, task in enumerate(roadmap):
     title = f"{i+1}. {task['title']}"
     body = f"Description and details for {task['title']}..."
-    create_issue(title, body, milestones[i]["number"])
+    create_issue(title, body, milestones[i])
