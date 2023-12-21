@@ -1,6 +1,7 @@
 import requests
 import json
 from datetime import datetime, timedelta
+import pytz
 
 # Replace with your GitHub repository details
 repo_owner = "Sam12121"
@@ -61,8 +62,8 @@ tasks = [
     {"title": "Continuous Monitoring and Improvement", "duration": 6},
 ]
 
-# Calculate due dates based on the current date
-current_date = datetime.now(timezone.utc)
+# Calculate due dates based on the current date in IST
+current_date = datetime.now(pytz.timezone('Asia/Kolkata'))
 milestones = []
 
 # Create milestones and issues for each task
