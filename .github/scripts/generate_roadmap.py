@@ -8,13 +8,13 @@ repo_name = "demo"
 token = "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"
 
 # Function to create a GitHub issue
-def create_issue(title, body, milestone):
+def create_issue(title, body, milestone_number):
     url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/issues"
     headers = {
         "Authorization": f"Bearer {token}",
         "Accept": "application/vnd.github.v3+json",
     }
-    data = {"title": title, "body": body, "milestone": milestone["number"]}
+    data = {"title": title, "body": body, "milestone": milestone_number}
     response = requests.post(url, headers=headers, data=json.dumps(data))
     return response.json()
 
@@ -27,7 +27,8 @@ def create_milestone(title, due_date=None):
     }
     data = {"title": title, "due_on": due_date}
     response = requests.post(url, headers=headers, data=json.dumps(data))
-    return response.json()
+    milestone_number = response.json().get("number")  # Extract milestone number
+    return milestone_number
 
 # Replace with your roadmap details
 roadmap = [
@@ -44,8 +45,8 @@ milestones = []
 
 for task in roadmap:
     due_date = current_date + timedelta(days=task["duration"] * 30)
-    milestone = create_milestone(task["title"], due_date.isoformat())
-    milestones.append(milestone)
+    milestone_number = create_milestone(task["title"], due_date.isoformat())
+    milestones.append(milestone_number)
 
 # Create issues under each milestone
 for i, task in enumerate(roadmap):
