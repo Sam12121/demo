@@ -5,7 +5,7 @@ import pytz
 
 # Replace with your GitHub repository details
 repo_owner = "Sam12121"
-repo_name = "demo"
+repo_name = "Sam12121/demo"
 token = "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"
 
 # Function to create a GitHub issue
