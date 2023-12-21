@@ -1,0 +1,32 @@
+name: Generate Roadmap
+
+on:
+  push:
+    branches:
+      - main  # Replace with your target branch
+
+jobs:
+  generate-roadmap:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set Up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install requests
+
+      - name: Run Roadmap Generation Script
+        run: |
+          python .github/scripts/generate_roadmap.py  # Adjust path accordingly
+        env:
+          REPO_OWNER: Sam12121
+          REPO_NAME: demo
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
