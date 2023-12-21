@@ -25,7 +25,7 @@ jobs:
         cd SecretScanner
         chmod +x ./bootstrap.sh
         ./bootstrap.sh
-        docker build --rm=true --tag=toaeio/toae_secret_scanner:2.0.0 -f Dockerfile .
+        docker build --rm=true --tag=toaeio/toae_secret_scanner_ce:2.0.1 -f Dockerfile .
 
     - name: Push Docker Image to Docker Hub
       run: docker push toaeio/toae_secret_scanner:2.0.0
