@@ -6,7 +6,7 @@ import pytz
 # Replace with your GitHub repository details
 repo_owner = "Sam12121"
 repo_name = "demo"
-token = "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"
+token = "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"
 
 # Function to create a GitHub issue
 def create_issue(title, body, milestone_number):
