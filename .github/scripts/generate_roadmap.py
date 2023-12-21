@@ -40,7 +40,7 @@ roadmap = [
 ]
 
 # Calculate due dates based on the current date
-current_date = datetime.utcnow()
+current_date = datetime.now(timezone.utc)  # Updated line to use timezone-aware object
 milestones = []
 
 for task in roadmap:
