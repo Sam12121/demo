@@ -10,12 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Clone Repository
-      run: |
-        git clone https://github.com/deepfence/SecretScanner.git
-        cd SecretScanner
-      shell: bash
-
     - name: Checkout Repository
       uses: actions/checkout@v2
 
@@ -24,6 +18,11 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Clone SecretScanner Repository
+      run: |
+        git clone https://github.com/deepfence/SecretScanner.git
+        cd SecretScanner
 
     - name: Set up Go
       uses: actions/setup-go@v2
@@ -38,3 +37,5 @@ jobs:
 
     - name: Push Docker Image to Docker Hub
       run: docker push toaeio/toae_secret_scanner:2.0.0
+
+    # Add additional steps here as needed.
