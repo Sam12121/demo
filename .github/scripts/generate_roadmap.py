@@ -6,14 +6,6 @@ from datetime import datetime, timedelta
 repo_owner = "Sam12121"
 repo_name = "demo"
 token = "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"
-import requests
-import json
-from datetime import datetime, timedelta
-
-# Replace with your GitHub repository details
-repo_owner = "your_username"
-repo_name = "your_repository"
-token = "your_personal_access_token"
 
 # Function to create a GitHub issue
 def create_issue(title, body, milestone_number):
@@ -26,8 +18,8 @@ def create_issue(title, body, milestone_number):
     response = requests.post(url, headers=headers, data=json.dumps(data))
     return response.json()
 
-# Function to create a GitHub milestone
-def create_milestone(title, due_date=None):
+# Function to create a GitHub milestone and extract milestone number
+def create_milestone_and_get_number(title, due_date=None):
     url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/milestones"
     headers = {
         "Authorization": f"Bearer {token}",
@@ -35,29 +27,55 @@ def create_milestone(title, due_date=None):
     }
     data = {"title": title, "due_on": due_date}
     response = requests.post(url, headers=headers, data=json.dumps(data))
-    milestone_number = response.json().get("number")  # Extract milestone number
+    milestone_number = response.json().get("number")
     return milestone_number
 
-# Replace with your roadmap details
-roadmap = [
-    {"title": "Discovery and Planning", "duration": 2},
+# Define tasks for each team and role
+tasks = [
+    # Backend Development (Go - Golang)
+    {"title": "Architecture and Database Setup", "duration": 2},
+    {"title": "Core Functionality Implementation", "duration": 2},
+    {"title": "API Development", "duration": 2},
+
+    # Frontend Development (React)
     {"title": "UI/UX Design Collaboration", "duration": 2},
-    {"title": "Development and Integration", "duration": 2},
-    {"title": "Testing and Validation", "duration": 2},
-    {"title": "Deployment and Post-Launch", "duration": 1},
+    {"title": "Frontend Implementation", "duration": 2},
+    {"title": "User Acceptance Testing", "duration": 2},
+
+    # AI Integration (Python)
+    {"title": "AI Model Selection", "duration": 2},
+    {"title": "Model Integration", "duration": 2},
+    {"title": "Continuous Improvement", "duration": 2},
+
+    # Testing Team
+    {"title": "Unit Testing", "duration": 6},
+    {"title": "Integration Testing", "duration": 2},
+    {"title": "Security Testing", "duration": 2},
+
+    # Project Management
+    {"title": "Overall Project Oversight", "duration": 6},
+    {"title": "Agile Methodology Implementation", "duration": 6},
+
+    # Miscellaneous
+    {"title": "Tools and Infrastructure Setup", "duration": 1},
+    {"title": "Continuous Monitoring and Improvement", "duration": 6},
 ]
 
 # Calculate due dates based on the current date
-current_date = datetime.utcnow()
+current_date = datetime.now(timezone.utc)
 milestones = []
 
-for task in roadmap:
+# Create milestones and issues for each task
+for task in tasks:
     due_date = current_date + timedelta(days=task["duration"] * 30)
-    milestone_number = create_milestone(task["title"], due_date.isoformat())
+    milestone_number = create_milestone_and_get_number(task["title"], due_date.isoformat())
+
+    # Create an issue for each task
+    issue_title = f"{task['title']} - {task['duration']} months"
+    issue_body = f"Description and details for {task['title']}..."
+    create_issue(issue_title, issue_body, milestone_number)
+
     milestones.append(milestone_number)
 
-# Create issues under each milestone
-for i, task in enumerate(roadmap):
-    title = f"{i+1}. {task['title']}"
-    body = f"Description and details for {task['title']}..."
-    create_issue(title, body, milestones[i])
+# Print milestone numbers for reference
+print("Milestone Numbers:", milestones)
