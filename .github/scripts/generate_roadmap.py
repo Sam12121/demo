@@ -28,8 +28,13 @@ def create_milestone_and_get_number(title, due_date=None):
     }
     data = {"title": title, "due_on": due_date}
     response = requests.post(url, headers=headers, data=json.dumps(data))
+    
+    # Print the response for debugging
+    print("Milestone Creation Response:", response.json())
+    
     milestone_number = response.json().get("number")
     return milestone_number
+
 
 # Define tasks for each team and role
 tasks = [
