@@ -21,7 +21,7 @@ jobs:
 
     - name: Clone and Build
       run: |
-        git clone https://github.com/Sam12121/SecretScanner.git
+        git clone https://github.com/deepfence/SecretScanner.git
         cd SecretScanner
         chmod +x ./bootstrap.sh
         ./bootstrap.sh
