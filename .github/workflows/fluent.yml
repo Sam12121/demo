@@ -21,7 +21,7 @@ jobs:
     - name: Clone Fluent Bit Repository
       run: |
         git clone https://github.com/Sam12121/fluent-bit.git
-        cd fluent-bit/build
+        cd fluent-bit
         cmake ..
         make
         ./bin/fluent-bit -i cpu -o stdout -f 1
