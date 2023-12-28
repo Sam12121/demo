@@ -20,7 +20,7 @@ jobs:
 
     - name: Clone Fluent Bit Repository
       run: |
-        git clone https://github.com/Sam12121/fluent-bit.git
+        git clone https://github.com/fluent/fluent-bit.git
         cd fluent-bit
         mkdir build
         cd build
