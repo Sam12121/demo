@@ -22,7 +22,8 @@ jobs:
       run: |
         git clone https://github.com/Sam12121/fluent-bit.git
         cd fluent-bit
-        pwd
+        mkdir build
+        cd build
         cmake ..
         make
         ./bin/fluent-bit -i cpu -o stdout -f 1
