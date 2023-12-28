@@ -19,8 +19,9 @@ jobs:
         sudo apt-get install -y cmake flex bison libyaml-dev libssl-dev
 
     - name: Clone Fluent Bit Repository
-      run: git clone https://github.com/Sam12121/fluent-bit.git
-           cd fluent-bit/build
-           cmake ..
-           make
+      run: |
+        git clone https://github.com/Sam12121/fluent-bit.git
+        cd fluent-bit/build
+        cmake ..
+        make
         ./bin/fluent-bit -i cpu -o stdout -f 1
