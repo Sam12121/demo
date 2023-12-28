@@ -20,16 +20,7 @@ jobs:
 
     - name: Clone Fluent Bit Repository
       run: git clone https://github.com/Sam12121/fluent-bit.git
-
-    - name: Navigate to Fluent Bit Directory
-      run: cd fluent-bit
-
-    - name: Check CMake Version
-      run: cmake --version
-
-    - name: Build and Run Fluent Bit
-      run: |
-        mkdir build
+           cd fluent-bit
         cd build
         cmake ..
         make
