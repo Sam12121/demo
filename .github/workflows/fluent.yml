@@ -22,7 +22,13 @@ jobs:
       run: |
         git clone https://github.com/Sam12121/fluent-bit.git
         cd fluent-bit
-        ls
+
+        # Check if CMakeLists.txt exists
+        if [ ! -e "CMakeLists.txt" ]; then
+          echo "Error: CMakeLists.txt not found in the fluent-bit directory."
+          exit 1
+        fi
+
         cmake ..
         make
         ./bin/fluent-bit -i cpu -o stdout -f 1
